@@ -62,7 +62,7 @@ npm run preview
 ![Neon Dodge Gameplay](screenshots/gameplay.png)
 
 ### Leaderboard
-![Neon Dodge Leaderboard](screenshots/leaderboard.png)
+![Neon Dodge Leaderboard](screenshots/Leaderboard.png)
 
 ## Play Online
 
