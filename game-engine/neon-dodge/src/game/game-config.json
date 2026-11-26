@@ -1,0 +1,28 @@
+
+{
+    "playerSpeed": 400,
+    "obstacleSpeed": 220,
+    "maxObstacleSpeed": 700,
+    "spawnInterval": 1000,
+    "scorePerObstacle": 1,
+    "obstacleTypes": [
+        {
+            "width": 25,
+            "height": 25,
+            "color": 65535,
+            "speedMultiplier": 1.3
+        },
+        {
+            "width": 40,
+            "height": 40,
+            "color": 16724838,
+            "speedMultiplier": 1.0
+        },
+        {
+            "width": 65,
+            "height": 65,
+            "color": 16755200,
+            "speedMultiplier": 0.8
+        }
+    ]
+}

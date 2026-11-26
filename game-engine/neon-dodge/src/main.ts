@@ -1,17 +1,14 @@
 
 import Phaser from 'phaser';
 import './style.css';
+import { BootScene } from './game/scenes/BootScene';
 import { GameScene } from './game/scenes/GameScene';
 
 const config: Phaser.Types.Core.GameConfig = {
-
     type: Phaser.AUTO,
-
     parent: 'app',
-
     width: 800,
     height: 600,
-
     backgroundColor: '#080b18',
 
     scale: {
@@ -19,7 +16,7 @@ const config: Phaser.Types.Core.GameConfig = {
         autoCenter: Phaser.Scale.CENTER_BOTH
     },
 
-    scene: [GameScene]
+    scene: [BootScene, GameScene]
 };
 
 new Phaser.Game(config);
