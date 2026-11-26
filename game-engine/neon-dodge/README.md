@@ -51,3 +51,19 @@ npm run preview
 - Phaser
 - TypeScript
 - Vite
+
+
+## Screenshots
+
+### Start Screen
+![Neon Dodge Start Screen](screenshots/start_screen.png)
+
+### Gameplay
+![Neon Dodge Gameplay](screenshots/gameplay.png)
+
+### Leaderboard
+![Neon Dodge Leaderboard](screenshots/leaderboard.png)
+
+## Play Online
+
+[Play Neon Dodge](https://outduke.github.io/AI-Game-Factory/)
