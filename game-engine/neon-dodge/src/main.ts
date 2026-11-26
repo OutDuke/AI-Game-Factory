@@ -20,3 +20,21 @@ const config: Phaser.Types.Core.GameConfig = {
 };
 
 new Phaser.Game(config);
+if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+        navigator.serviceWorker
+            .register(`${import.meta.env.BASE_URL}sw.js`)
+            .then((registration) => {
+                console.log(
+                    'Offline support registered:',
+                    registration.scope
+                );
+            })
+            .catch((error) => {
+                console.error(
+                    'Service worker registration failed:',
+                    error
+                );
+            });
+    });
+}
