@@ -58,7 +58,7 @@ export class BootScene extends Phaser.Scene {
     }
 
     preload(): void {
-    this.load.audio('hit', '/audio/hit.ogg');
-    this.load.audio('game-over', '/audio/game-over.ogg');
+        this.load.audio('hit', 'audio/hit.ogg');
+        this.load.audio('game-over', 'audio/game-over.ogg');
     }
 }
