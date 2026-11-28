@@ -6,9 +6,14 @@ export interface ObstacleConfig {
     height: number;
     color: number;
     speedMultiplier: number;
+    speed: number;
+    spawnInterval: number;
 }
 
 export interface GameConfig {
+    gameTitle?: string;
+    genre?: string;
+    startingLives: number;
     playerSpeed: number;
     obstacleSpeed: number;
     maxObstacleSpeed: number;

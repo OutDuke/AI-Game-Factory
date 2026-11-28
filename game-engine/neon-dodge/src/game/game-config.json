@@ -1,5 +1,6 @@
 
 {
+    "startingLives": 3,
     "playerSpeed": 400,
     "obstacleSpeed": 220,
     "maxObstacleSpeed": 700,
@@ -10,19 +11,25 @@
             "width": 25,
             "height": 25,
             "color": 65535,
-            "speedMultiplier": 1.3
+            "speedMultiplier": 1.3,
+            "speed": 220,
+            "spawnInterval": 1000
         },
         {
             "width": 40,
             "height": 40,
             "color": 16724838,
-            "speedMultiplier": 1.0
+            "speedMultiplier": 1.0,
+            "speed": 220,
+            "spawnInterval": 1000
         },
         {
             "width": 65,
             "height": 65,
             "color": 16755200,
-            "speedMultiplier": 0.8
+            "speedMultiplier": 0.8,
+            "speed": 220,
+            "spawnInterval": 1000
         }
     ]
 }

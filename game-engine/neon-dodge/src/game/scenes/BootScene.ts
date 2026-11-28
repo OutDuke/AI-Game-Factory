@@ -22,6 +22,21 @@ export class BootScene extends Phaser.Scene {
 
         this.createDifficultyButton(300, 'EASY', easyConfig);
         this.createDifficultyButton(390, 'HARD', hardConfig);
+
+        const generatedConfig = this.registry.get('generatedGameConfig');
+
+        if (generatedConfig) {
+            console.log('BOOT SCENE EXECUTED');
+
+            const generatedConfig = this.registry.get('generatedGameConfig');
+
+            console.log('GENERATED CONFIG IN BOOT SCENE:', generatedConfig);
+            this.createDifficultyButton(
+                480,
+                'AI GENERATED',
+                generatedConfig
+            );
+        }
     }
 
     private createDifficultyButton(

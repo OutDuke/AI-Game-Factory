@@ -1,4 +1,4 @@
-import type { GameConfig } from '../GameConfig';
+import type { GameConfig, ObstacleConfig } from '../GameConfig';
 import { loadGameConfig } from '../systems/ConfigLoader';
 import Phaser from 'phaser';
 import { Player } from '../entities/Player';
@@ -19,7 +19,6 @@ export class GameScene extends Phaser.Scene {
 
     private obstacleSpeed: number = 220;
     private maxObstacleSpeed: number = 700;
-    private spawnInterval: number = 1000;
 
     private player!: Player;
 
@@ -32,7 +31,7 @@ export class GameScene extends Phaser.Scene {
 
     private obstacles: Obstacle[] = [];
 
-    private spawnTimer: number = 0;
+    private obstacleSpawnTimers = new Map<ObstacleConfig, number>();
 
 
     private score: number = 0;
@@ -99,12 +98,13 @@ export class GameScene extends Phaser.Scene {
 // Reset game state whenever the scene starts or restarts
         this.stateManager.reset();
         this.score = 0;
-        this.lives = 3;
+        this.lives = this.config.startingLives;
         this.isInvulnerable = false;
-        this.spawnTimer = 0;
+        this.obstacleSpawnTimers = new Map(
+            this.config.obstacleTypes.map(type => [type, 0])
+        );
         this.obstacleSpeed = this.config.obstacleSpeed;
         this.maxObstacleSpeed = this.config.maxObstacleSpeed;
-        this.spawnInterval = this.config.spawnInterval;
         this.obstacles = [];
         this.createImpactTexture();
 
@@ -134,7 +134,7 @@ export class GameScene extends Phaser.Scene {
         });
 
         // Game title
-        this.add.text(400, 40, 'NEON DODGE', {
+        this.add.text(400, 40, this.config.gameTitle || 'NEON DODGE', {
             fontSize: '32px',
             color: '#00ffff',
             fontStyle: 'bold'
@@ -226,11 +226,22 @@ export class GameScene extends Phaser.Scene {
         );
 
         // Spawn obstacles
-        this.spawnTimer += delta;
+        // Spawn each obstacle type independently
+        for (const type of this.config.obstacleTypes) {
 
-        if (this.spawnTimer >= this.spawnInterval) {
-            this.spawnObstacle();
-            this.spawnTimer = 0;
+            const elapsed =
+                (this.obstacleSpawnTimers.get(type) ?? 0) + delta;
+
+            if (elapsed >= type.spawnInterval) {
+                this.spawnObstacle(type);
+
+                this.obstacleSpawnTimers.set(
+                    type,
+                    elapsed - type.spawnInterval
+                );
+            } else {
+                this.obstacleSpawnTimers.set(type, elapsed);
+            }
         }
 
         // Update obstacles
@@ -321,11 +332,7 @@ export class GameScene extends Phaser.Scene {
         }
     }
 
-    private spawnObstacle(): void {
-        // Define available obstacle types
-        const type = Phaser.Utils.Array.GetRandom(
-            this.config.obstacleTypes
-        );
+    private spawnObstacle(type: ObstacleConfig): void {
 
         // Keep the obstacle inside the game boundaries
         const x = Phaser.Math.Between(
@@ -333,8 +340,14 @@ export class GameScene extends Phaser.Scene {
             this.scale.width - type.width / 2 - 5
         );
 
-        // Apply its individual speed multiplier
-        const speed = this.obstacleSpeed * type.speedMultiplier;
+        // Apply individual speed and difficulty progression
+        const difficultyMultiplier =
+            this.obstacleSpeed / this.config.obstacleSpeed;
+
+        const speed =
+            type.speed *
+            type.speedMultiplier *
+            difficultyMultiplier;
 
         const obstacle = new Obstacle(
             this,

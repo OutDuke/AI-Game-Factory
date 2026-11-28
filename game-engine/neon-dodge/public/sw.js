@@ -1,12 +1,12 @@
 
-const CACHE_NAME = 'neon-dodge-v1';
+const CACHE_NAME = 'neon-dodge-v2';
 
 const APP_FILES = [
     './',
     './index.html'
 ];
 
-// Install and cache the main game page.
+// Install the new service worker.
 self.addEventListener('install', (event) => {
     event.waitUntil(
         caches.open(CACHE_NAME).then((cache) => {
@@ -17,7 +17,7 @@ self.addEventListener('install', (event) => {
     self.skipWaiting();
 });
 
-// Remove older versions of the cache.
+// Activate the new worker and remove old caches.
 self.addEventListener('activate', (event) => {
     event.waitUntil(
         caches.keys().then((keys) => {
@@ -32,7 +32,8 @@ self.addEventListener('activate', (event) => {
     self.clients.claim();
 });
 
-// Serve cached files when offline; cache game assets as they are requested.
+// Network-first for HTML and generated configurations.
+// Cache-first for other static assets.
 self.addEventListener('fetch', (event) => {
     const request = event.request;
 
@@ -40,25 +41,64 @@ self.addEventListener('fetch', (event) => {
         return;
     }
 
+    const url = new URL(request.url);
+
+    if (url.origin !== self.location.origin) {
+        return;
+    }
+
+    const isHTML = request.mode === 'navigate' ||
+        url.pathname.endsWith('.html');
+
+    const isGeneratedConfig =
+        url.pathname.includes('/generated-configs/');
+
+    if (isHTML || isGeneratedConfig) {
+        event.respondWith(
+            fetch(request)
+                .then((response) => {
+                    if (response.ok) {
+                        const copy = response.clone();
+
+                        caches.open(CACHE_NAME).then((cache) => {
+                            cache.put(request, copy);
+                        });
+                    }
+
+                    return response;
+                })
+                .catch(async () => {
+                    const cached = await caches.match(request);
+
+                    if (cached) {
+                        return cached;
+                    }
+
+                    return new Response('Offline and resource unavailable', {
+                        status: 503
+                    });
+                })
+        );
+
+        return;
+    }
+
     event.respondWith(
-        caches.match(request).then((cachedResponse) => {
-            if (cachedResponse) {
-                return cachedResponse;
+        caches.match(request).then((cached) => {
+            if (cached) {
+                return cached;
             }
 
-            return fetch(request).then((networkResponse) => {
-                if (
-                    networkResponse.ok &&
-                    new URL(request.url).origin === self.location.origin
-                ) {
-                    const responseCopy = networkResponse.clone();
+            return fetch(request).then((response) => {
+                if (response.ok) {
+                    const copy = response.clone();
 
                     caches.open(CACHE_NAME).then((cache) => {
-                        cache.put(request, responseCopy);
+                        cache.put(request, copy);
                     });
                 }
 
-                return networkResponse;
+                return response;
             });
         })
     );

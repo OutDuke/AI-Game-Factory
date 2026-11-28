@@ -1,0 +1,44 @@
+{
+    "gameTitle": "Asteroid Dodge Arcade",
+    "genre": "Vertical Scrolling Shooter",
+    "startingLives": 3,
+    "playerSpeed": 350,
+    "obstacleSpeed": 150,
+    "maxObstacleSpeed": 450,
+    "spawnInterval": 800,
+    "scorePerObstacle": 100,
+    "obstacleTypes": [
+        {
+            "width": 40,
+            "height": 40,
+            "color": 0,
+            "speedMultiplier": 1.0,
+            "speed": 150,
+            "spawnInterval": 800
+        },
+        {
+            "width": 30,
+            "height": 60,
+            "color": 8421775,
+            "speedMultiplier": 1.5,
+            "speed": 250,
+            "spawnInterval": 600
+        },
+        {
+            "width": 50,
+            "height": 50,
+            "color": 16711680,
+            "speedMultiplier": 2.0,
+            "speed": 320,
+            "spawnInterval": 500
+        },
+        {
+            "width": 35,
+            "height": 35,
+            "color": 65535,
+            "speedMultiplier": 0.75,
+            "speed": 180,
+            "spawnInterval": 1000
+        }
+    ]
+}
