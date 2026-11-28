@@ -1,4 +1,3 @@
-
 import gameConfig from './game-config.json';
 
 export interface ObstacleConfig {
@@ -12,7 +11,6 @@ export interface ObstacleConfig {
 
 export interface GameConfig {
     gameTitle?: string;
-    genre?: string;
     startingLives: number;
     playerSpeed: number;
     obstacleSpeed: number;

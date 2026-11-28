@@ -1,4 +1,6 @@
 {
+    "gameTitle": "NEON DODGE",
+    "startingLives": 3,
     "playerSpeed": 150,
     "obstacleSpeed": 180,
     "maxObstacleSpeed": 500,
@@ -9,13 +11,17 @@
             "width": 25,
             "height": 25,
             "color": 65535,
-            "speedMultiplier": 1.0
+            "speedMultiplier": 1.0,
+            "speed": 180,
+            "spawnInterval": 1400
         },
         {
             "width": 40,
             "height": 40,
             "color": 16724838,
-            "speedMultiplier": 0.9
+            "speedMultiplier": 0.9,
+            "speed": 180,
+            "spawnInterval": 1700
         }
     ]
 }

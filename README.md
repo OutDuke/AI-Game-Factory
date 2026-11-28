@@ -1,56 +1,79 @@
-# AI Game Factory
+# Neon Dodge
 
-An AI-powered game development factory designed to generate, test, and prepare original browser-based arcade games.
+A standalone browser arcade game built with Phaser 4, TypeScript, and Vite.
 
-The project aims to build an automated game development pipeline using AI agents, reusable game templates, and automated testing tools.
+## Run locally
 
-## Technology Stack
+Requirements: Node.js and npm.
 
-- **Game Development:** Phaser, TypeScript
-- **Backend:** Python, FastAPI
-- **AI Integration:** Ollama
-- **Automated Testing:** Playwright
-
-## First Game: Neon Dodge
-
-Neon Dodge is the first playable game developed using the factory's reusable game engine.
-
-### Features
-- Easy and Hard difficulty modes
-- Keyboard and mouse controls
-- Lives counter
-- Pause menu
-- Sound toggle
-- Persistent Top 10 leaderboard
-- Collision detection and particle effects
-- Progressive difficulty
-- Offline production build
-
-## Project Structure
-
-```text
-AI-Game-Factory/
-├── backend/
-├── game-engine/
-│   └── neon-dodge/
-├── generated-games/
-├── templates/
-├── tests/
-└── docs/
+```bash
+npm install
+npm run dev
 ```
 
-## Project Goals
+Open the local URL printed by Vite.
 
-- Develop a reusable browser game engine.
-- Integrate locally hosted AI models.
-- Generate games using reusable templates.
-- Automate gameplay testing.
-- Prepare games for browser-based publishing platforms.
+## Production build
 
-## Current Status
+```bash
+npm run build
+npm run preview
+```
 
-The first game, Neon Dodge, is playable. The AI orchestration, automated generation, and testing pipeline are planned development stages.
+## Controls
 
-## License
+| Input | Action |
+|---|---|
+| A / D or Arrow Keys | Move |
+| Mouse / Touch | Move |
+| P / Escape | Pause / Resume |
+| V | Toggle sound |
+| R | Restart after Game Over |
+| M | Return to difficulty selection |
 
-To be determined.
+## Features
+
+- Easy and Hard difficulty modes
+- Three lives
+- Score and persistent high score
+- Local Top 10 leaderboard with initials
+- Pause and resume
+- Mouse, touch, and keyboard movement
+- Neon player trail and engine glow
+- Collision particles and screen shake
+- Progressive obstacle speed
+- Sound effects and mute toggle
+- Offline support through a service worker
+
+## Project structure
+
+```text
+src/
+  main.ts
+  style.css
+  engine/
+    config/
+      ConfigValidator.ts
+    entities/
+      Obstacle.ts
+    systems/
+      CollisionSystem.ts
+      GameState.ts
+      GameStateManager.ts
+  game/
+    GameConfig.ts
+    ScoreEntry.ts
+    game-config.json
+    entities/
+      Player.ts
+    profiles/
+      neon-dodge-easy.json
+      neon-dodge-hard.json
+    scenes/
+      BootScene.ts
+      GameScene.ts
+    systems/
+      ConfigLoader.ts
+```
+
+This repository contains only Neon Dodge. The AI Game Factory backend, Ollama integration, game-plan generator, and generic template system have been removed.

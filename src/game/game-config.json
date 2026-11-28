@@ -1,4 +1,3 @@
-
 {
     "startingLives": 3,
     "playerSpeed": 400,
@@ -31,5 +30,6 @@
             "speed": 220,
             "spawnInterval": 1000
         }
-    ]
+    ],
+    "gameTitle": "NEON DODGE"
 }
