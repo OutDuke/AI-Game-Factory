@@ -1,5 +1,5 @@
 
-const CACHE_NAME = 'neon-dodge-v2';
+const CACHE_NAME = 'neon-dodge-v3';
 
 const APP_FILES = [
     './',
@@ -84,12 +84,8 @@ self.addEventListener('fetch', (event) => {
     }
 
     event.respondWith(
-        caches.match(request).then((cached) => {
-            if (cached) {
-                return cached;
-            }
-
-            return fetch(request).then((response) => {
+        fetch(request)
+            .then((response) => {
                 if (response.ok) {
                     const copy = response.clone();
 
@@ -99,7 +95,17 @@ self.addEventListener('fetch', (event) => {
                 }
 
                 return response;
-            });
-        })
+            })
+            .catch(async () => {
+                const cached = await caches.match(request);
+
+                if (cached) {
+                    return cached;
+                }
+
+                return new Response('Resource unavailable offline', {
+                    status: 503
+                });
+            })
     );
 });
