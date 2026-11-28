@@ -1,79 +1,86 @@
-# Neon Dodge
+# ⚡ Neon Dodge
 
-A standalone browser arcade game built with Phaser 4, TypeScript, and Vite.
+**A neon-themed arcade survival game built with Phaser, TypeScript and Vite.**
 
-## Run locally
+Dodge incoming obstacles, survive as long as possible, and beat your highest score. Choose your difficulty, improve your reflexes, and climb the leaderboard.
 
-Requirements: Node.js and npm.
+<p align="center">
+  <a href="https://outduke.github.io/AI-Game-Factory/">
+    <strong>🎮 PLAY NEON DODGE</strong>
+  </a>
+</p>
+
+## Screenshots
+
+### Gameplay
+![Gameplay](screenshots/gameplay.png)
+
+### Start Screen
+![Start Screen](screenshots/start_screen.png)
+
+### Leaderboard
+![Leaderboard](screenshots/Leaderboard.png)
+
+### Game Over
+![Game Over](screenshots/game_over.png)
+
+## Features
+
+- Neon-themed visuals and particle effects
+- Player movement using keyboard and mouse
+- Easy and Hard difficulty modes
+- Obstacle spawning and collision detection
+- Lives and scoring system
+- Progressive difficulty
+- Pause, resume and restart
+- High-score tracking and Top 10 leaderboard
+- Sound effects with mute controls
+- Offline support
+
+## Controls
+
+| Key | Action |
+|---|---|
+| Arrow Keys / WASD | Move |
+| Mouse | Move player |
+| P / Escape | Pause |
+| R | Restart |
+| V | Toggle sound |
+| M | Return to menu |
+
+## Tech Stack
+
+- **Language:** TypeScript
+- **Game Framework:** Phaser
+- **Build Tool:** Vite
+- **Styling:** CSS
+- **Deployment:** GitHub Pages
+
+## Run Locally
+
+Make sure you have Node.js installed.
 
 ```bash
+git clone https://github.com/OutDuke/AI-Game-Factory.git
+cd AI-Game-Factory
 npm install
 npm run dev
 ```
 
-Open the local URL printed by Vite.
+Open the local URL displayed by Vite.
 
-## Production build
+## Production Build
 
 ```bash
 npm run build
-npm run preview
 ```
 
-## Controls
+The production files will be generated in the `dist/` directory.
 
-| Input | Action |
-|---|---|
-| A / D or Arrow Keys | Move |
-| Mouse / Touch | Move |
-| P / Escape | Pause / Resume |
-| V | Toggle sound |
-| R | Restart after Game Over |
-| M | Return to difficulty selection |
+## Play Online
 
-## Features
+https://outduke.github.io/AI-Game-Factory/
 
-- Easy and Hard difficulty modes
-- Three lives
-- Score and persistent high score
-- Local Top 10 leaderboard with initials
-- Pause and resume
-- Mouse, touch, and keyboard movement
-- Neon player trail and engine glow
-- Collision particles and screen shake
-- Progressive obstacle speed
-- Sound effects and mute toggle
-- Offline support through a service worker
+---
 
-## Project structure
-
-```text
-src/
-  main.ts
-  style.css
-  engine/
-    config/
-      ConfigValidator.ts
-    entities/
-      Obstacle.ts
-    systems/
-      CollisionSystem.ts
-      GameState.ts
-      GameStateManager.ts
-  game/
-    GameConfig.ts
-    ScoreEntry.ts
-    game-config.json
-    entities/
-      Player.ts
-    profiles/
-      neon-dodge-easy.json
-      neon-dodge-hard.json
-    scenes/
-      BootScene.ts
-      GameScene.ts
-    systems/
-      ConfigLoader.ts
-```
-
-This repository contains only Neon Dodge. The AI Game Factory backend, Ollama integration, game-plan generator, and generic template system have been removed.
+**Built as a personal game development project.**
